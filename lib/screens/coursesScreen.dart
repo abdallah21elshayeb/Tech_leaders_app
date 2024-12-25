@@ -16,7 +16,7 @@ class _CoursesScreenState extends State<CoursesScreen> {
 // assets/images/robot.png
   final coursesData = [
     CourseDetails(
-        'Robot Course', 'assets/images/robot.png', '25', 'Karim Elwaly', '500'),
+        'Robot Course', 'assets/images/robot.png', '25', 'Karim Elwaly', '500',),
     CourseDetails('Mobile App', 'assets/images/flutter.png', '30',
         'Abdallah Elshayeb', '600'),
     CourseDetails(
@@ -35,7 +35,6 @@ class _CoursesScreenState extends State<CoursesScreen> {
     final courseModel = Provider.of<CourseModel>(context, listen: false);
 
     courseModel.toggleCourses(course);
-
 
     setState(() {
       course.isFavorite = isFavorite;

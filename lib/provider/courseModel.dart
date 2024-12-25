@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-
 import '../Models/course_details.dart';
 
 class CourseModel with ChangeNotifier {
@@ -13,6 +12,11 @@ class CourseModel with ChangeNotifier {
     } else {
       _favoriteCourses.add(course);
     }
+    notifyListeners();
+  }
+
+  void removeCourses(CourseDetails course) {
+    _favoriteCourses.remove(course);
     notifyListeners();
   }
 

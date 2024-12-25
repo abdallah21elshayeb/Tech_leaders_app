@@ -16,52 +16,54 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: SingleChildScrollView(
-          child: Column(
-            children: [
-              PrimaryHeaderContainer(
-                child: Column(
-                  children: [
-                    CustomAppBar(
-                      title: const Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Technology Leaders Academy',
-                            style: TextStyle(fontSize: 20, color: Colors.white60),
-                          ),
-                        ],
+      child: Column(
+        children: [
+          PrimaryHeaderContainer(
+            child: Column(
+              children: [
+                CustomAppBar(
+                  title: const Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Technology Leaders Academy',
+                        style: TextStyle(fontSize: 20, color: Colors.white70),
                       ),
-                      actions: [
-                        Stack(
-                          children: [
-                            IconButton(
-                              onPressed: () {},
-                              icon: const Icon(
-                                Icons.ac_unit,
-                                color: Colors.white,
-                              ),
-                            ),
-                            Positioned(
-                              right: 0,
-                              child: Container(
-                                width: 18,
-                                height: 18,
-                                decoration: BoxDecoration(
-                                  color: Colors.black,
-                                  borderRadius: BorderRadius.circular(100),
-                                ),
-                              ),
-                            )
-                          ],
+                    ],
+                  ),
+                  actions: [
+                    Stack(
+                      children: [
+                        IconButton(
+                          onPressed: () {},
+                          icon: const Icon(
+                            Icons.laptop_chromebook_rounded,
+                            color: Colors.white,
+                          ),
                         ),
+                        // Positioned(
+                        //   right: 0,
+                        //   child: Container(
+                        //     width: 18,
+                        //     height: 18,
+                        //     decoration: BoxDecoration(
+                        //       color: Colors.white60,
+                        //       borderRadius: BorderRadius.circular(100),
+                        //     ),
+                        //   ),
+                        // )
                       ],
                     ),
                   ],
                 ),
-              )
-            ],
+
+              ],
+            ),
           ),
-        ));
+
+        ],
+      ),
+    ));
   }
 }
 
