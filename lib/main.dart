@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tech_test/provider/courseModel.dart';
+import 'package:tech_test/screens/signinPage.dart';
+import 'package:tech_test/screens/signUpPage.dart';
 import 'package:tech_test/widgets/custom_bottom_bar.dart';
 import 'package:provider/provider.dart';
 
@@ -26,7 +28,9 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const BottomBar(),
+      home: SignInPage()
+      // const BottomBar(),
+      // SignInScreen()
     );
   }
 }
