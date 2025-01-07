@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "683249203234",
+    "project_id": "tech-leaders-59614",
+    "storage_bucket": "tech-leaders-59614.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:683249203234:android:8e48b83352d2d19407327b",
+        "android_client_info": {
+          "package_name": "com.techAcadamy.techLeader"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMP3NFKS-xf8S3dAkoD0xxrqrwiRVp9xQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
