@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:tech_test/widgets/app_bar.dart';
-import 'package:tech_test/widgets/circular_container.dart';
-import 'package:tech_test/widgets/curved_edges.dart';
+// import 'package:tech_test/widgets/circular_container.dart';
+// import 'package:tech_test/widgets/curved_edges.dart';
 import 'package:tech_test/widgets/primary_header_container.dart';
+
+import '../services/auth_sevices.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -12,6 +14,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  void _signOut() async {
+    await AuthService().signOut(context: context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Stack(
                       children: [
                         IconButton(
-                          onPressed: () {},
+                          onPressed: _signOut,
                           icon: const Icon(
                             Icons.laptop_chromebook_rounded,
                             color: Colors.white,
@@ -56,11 +62,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ],
                 ),
-
               ],
             ),
           ),
-
         ],
       ),
     ));

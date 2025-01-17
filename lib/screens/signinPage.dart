@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tech_test/screens/signUpPage.dart';
+import 'package:tech_test/services/auth_sevices.dart';
 import 'package:tech_test/widgets/custom_bottom_bar.dart';
 
 class SignInPage extends StatefulWidget {
@@ -13,24 +14,29 @@ class _SignInPageState extends State<SignInPage> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  bool _obscureText = true;
 
-  void _signIn() {
+  void _signIn() async {
     if (_formKey.currentState!.validate()) {
-      if (_emailController.text == 'abdallah@example.com' &&
-          _passwordController.text == 'password2233') {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const BottomBar(),
-          ),
-        );
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Incorrect email or password'),
-          ),
-        );
-      }
+      await AuthService().signIn(
+          email: _emailController.text,
+          password: _passwordController.text,
+          context: context);
+      // if (_emailController.text == 'abdallah@example.com' &&
+      //     _passwordController.text == 'password2233') {
+      //   Navigator.push(
+      //     context,
+      //     MaterialPageRoute(
+      //       builder: (context) => const BottomBar(),
+      //     ),
+      //   );
+      // } else {
+      //   ScaffoldMessenger.of(context).showSnackBar(
+      //     const SnackBar(
+      //       content: Text('Incorrect email or password'),
+      //     ),
+      //   );
+      // }
     }
   }
 
@@ -81,9 +87,20 @@ class _SignInPageState extends State<SignInPage> {
               ),
               TextFormField(
                 controller: _passwordController,
-                obscureText: true,
-                decoration: const InputDecoration(
-                    labelText: 'Password', border: OutlineInputBorder()),
+                obscureText: _obscureText,
+                decoration:  InputDecoration(
+                  labelText: 'Password',
+                  border: const OutlineInputBorder(),
+                  suffixIcon: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          _obscureText = !_obscureText;
+                        });
+                      },
+                      icon: Icon(
+                        _obscureText ? Icons.visibility_off : Icons.visibility,
+                      )),
+                ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'please enter your password';

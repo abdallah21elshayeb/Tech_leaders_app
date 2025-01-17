@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tech_test/screens/signinPage.dart';
+import 'package:tech_test/services/auth_sevices.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -17,17 +18,19 @@ class _SignUpPageState extends State<SignUpPage> {
 
   final List<String> _locations = ['Zayed', 'October', 'Mohandsen'];
 
-  void _signUp() {
+  void _signUp() async {
     if (_formKey.currentState!.validate()) {
+
+      await AuthService().signUp(email: _emailController.text, password: _passwordController.text, context: context);
       // Perform sign-up logic here
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Account created successfully!')),
-      );
-      // Example: Navigate to the home page
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const SignInPage()),
-      );
+      // ScaffoldMessenger.of(context).showSnackBar(
+      //   const SnackBar(content: Text('Account created successfully!')),
+      // );
+      // // Example: Navigate to the home page
+      // Navigator.push(
+      //   context,
+      //   MaterialPageRoute(builder: (context) => const SignInPage()),
+      // );
     }
   }
 
@@ -50,45 +53,45 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
               const SizedBox(height: 16),
               // Name Input
-              TextFormField(
-                controller: _nameController,
-                decoration: const InputDecoration(
-                  labelText: 'Name',
-                  border: OutlineInputBorder(),
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your name';
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(height: 16),
-              // Dropdown List for Location
-              DropdownButtonFormField<String>(
-                value: _selectedLocation,
-                decoration: const InputDecoration(
-                  labelText: 'Location',
-                  border: OutlineInputBorder(),
-                ),
-                items: _locations.map((location) {
-                  return DropdownMenuItem(
-                    value: location,
-                    child: Text(location),
-                  );
-                }).toList(),
-                onChanged: (value) {
-                  setState(() {
-                    _selectedLocation = value;
-                  });
-                },
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please select a location';
-                  }
-                  return null;
-                },
-              ),
+              // TextFormField(
+              //   controller: _nameController,
+              //   decoration: const InputDecoration(
+              //     labelText: 'Name',
+              //     border: OutlineInputBorder(),
+              //   ),
+              //   validator: (value) {
+              //     if (value == null || value.isEmpty) {
+              //       return 'Please enter your name';
+              //     }
+              //     return null;
+              //   },
+              // ),
+              // const SizedBox(height: 16),
+              // // Dropdown List for Location
+              // DropdownButtonFormField<String>(
+              //   value: _selectedLocation,
+              //   decoration: const InputDecoration(
+              //     labelText: 'Location',
+              //     border: OutlineInputBorder(),
+              //   ),
+              //   items: _locations.map((location) {
+              //     return DropdownMenuItem(
+              //       value: location,
+              //       child: Text(location),
+              //     );
+              //   }).toList(),
+              //   onChanged: (value) {
+              //     setState(() {
+              //       _selectedLocation = value;
+              //     });
+              //   },
+              //   validator: (value) {
+              //     if (value == null || value.isEmpty) {
+              //       return 'Please select a location';
+              //     }
+              //     return null;
+              //   },
+              // ),
               const SizedBox(height: 16),
               // Email Input
               TextFormField(
