@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tech_test/screens/adminScreen.dart';
 import 'package:tech_test/screens/coursesScreen.dart';
 import 'package:tech_test/screens/homeScreen.dart';
 import 'package:tech_test/screens/tournementScreen.dart';
@@ -17,7 +18,8 @@ class _BottomBarState extends State<BottomBar> {
     const HomeScreen(),
      CoursesScreen(),
     const TournamentScreen(),
-    const FavoriteScreen()
+    const FavoriteScreen(),
+    const AdminScreen()
   ];
 
   void updatePage(int page) {
@@ -43,11 +45,14 @@ class _BottomBarState extends State<BottomBar> {
                 icon: Icons.emoji_events_rounded,
                 pageIndex: 2,
                 title: 'tournaments'),
-
             getNavBottom(
                 icon: Icons.person,
                 pageIndex: 3,
                 title: 'about'),
+            getNavBottom(
+                icon: Icons.settings,
+                pageIndex: 4,
+                title: 'admin'),
           ],
           onTap: updatePage,
         ));
