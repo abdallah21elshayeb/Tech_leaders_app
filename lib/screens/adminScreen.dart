@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import '../Models/course_save.dart';
@@ -19,6 +20,8 @@ class _AdminScreenState extends State<AdminScreen> {
   final _courseTimeController = TextEditingController();
   final _courseLocationController = TextEditingController();
   final _courseFeesController = TextEditingController();
+  String? _selectedLocation;
+  final List<String> _locations = ['Zayed', 'October', 'Mohandsen'];
   final List<Course> _courses = [];
 
   Future<void> _pickImage() async {
@@ -39,7 +42,7 @@ class _AdminScreenState extends State<AdminScreen> {
         title: _courseTitleController.text.trim(),
         instructor: _instructorNameController.text.trim(),
         time: _courseTimeController.text.trim(),
-        location: _courseLocationController.text.trim(),
+        location: _selectedLocation!,
         fees: _courseFeesController.text.trim(),
       );
       _courses.add(newCourse); // Add the course to the list
@@ -48,13 +51,40 @@ class _AdminScreenState extends State<AdminScreen> {
   }
 
   Future<void> _submitForm() async {
-    final db = FirebaseFirestore.instance;
-    try {
-      final courseList = _courses.map((course) => course.toMap()).toList();
-      await db.collection("academyCourse").add({'course': courseList});
-      print('course Details saved successfully!!');
-    } catch (e) {
-      print('failled to save course details: $e');
+    if (_formKey.currentState!.validate()) {
+      final db = FirebaseFirestore.instance;
+      try {
+        final courseList = _courses.map((course) => course.toMap()).toList();
+        await db.collection("academyCourse").add({'course': courseList});
+        Fluttertoast.showToast(
+          msg: 'course Details saved successfully!!',
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.SNACKBAR,
+          backgroundColor: Colors.blue,
+          textColor: Colors.white,
+          fontSize: 14,
+        );
+        _courseTitleController.clear();
+        _instructorNameController.clear();
+        _courseTimeController.clear();
+        _courseFeesController.clear();
+        setState(() {
+          _image = null;
+          _selectedLocation = null; // Reset dropdown selection
+        });
+        _courses.clear();
+      } catch (e) {
+        print('failled to save course details: $e');
+      }
+    } else {
+      Fluttertoast.showToast(
+        msg: 'Please fill all fields before submitting!',
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.SNACKBAR,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 14,
+      );
     }
   }
 
@@ -152,18 +182,28 @@ class _AdminScreenState extends State<AdminScreen> {
                   return null;
                 },
               ),
-              const SizedBox(
-                height: 20,
-              ),
-              TextFormField(
-                controller: _courseLocationController,
+              const SizedBox(height: 16),
+              // Dropdown List for Location
+              DropdownButtonFormField<String>(
+                value: _selectedLocation ?? _locations.first,
                 decoration: const InputDecoration(
                   labelText: 'Location',
                   border: OutlineInputBorder(),
                 ),
+                items: _locations.map((location) {
+                  return DropdownMenuItem(
+                    value: location,
+                    child: Text(location),
+                  );
+                }).toList(),
+                onChanged: (value) {
+                  setState(() {
+                    _selectedLocation = value;
+                  });
+                },
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter a Location.';
+                    return 'Please select a location';
                   }
                   return null;
                 },
