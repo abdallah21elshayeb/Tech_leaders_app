@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tech_test/widgets/course_details.dart';
 import 'package:tech_test/widgets/courses_card.dart';
 
 import '../Models/course_details.dart';
@@ -55,11 +56,13 @@ class _CoursesScreenState extends State<CoursesScreen> {
 
           for (var courseData in courseList) {
             loadedCourses.add(CourseDetails(
-                courseData['title'],
-                courseData['image'],
-                '0',
-                courseData['instructor'],
-                courseData['fees']));
+              courseData['title'],
+              courseData['image'],
+              '0',
+              courseData['instructor'],
+              courseData['fees'],
+              courseData['location'],
+            ));
           }
         }
         setState(() {
@@ -139,6 +142,18 @@ class _CoursesScreenState extends State<CoursesScreen> {
                           courseFees: course.courseFees,
                           onFavoriteChanged: (isFavorite) =>
                               handleFavoriteChange(index, isFavorite, context),
+                          onTabDetails: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => CourseDetailsScreen(
+                                        imgUrl: course.imgUrl,
+                                        courseName: course.courseName,
+                                        courseDescription:
+                                            course.instructorName,
+                                        courseLocation:
+                                            course.courseLocation)));
+                          },
                         );
                       },
                     ),

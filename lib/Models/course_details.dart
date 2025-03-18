@@ -4,10 +4,11 @@ class CourseDetails {
   final String offerPercent;
   final String instructorName;
   final String courseFees;
+  final String courseLocation;
   bool isFavorite; // Track favorite state
 
   CourseDetails(this.courseName, this.imgUrl, this.offerPercent,
-      this.instructorName, this.courseFees,
+      this.instructorName, this.courseFees, this.courseLocation,
       {this.isFavorite = false});
 
   // convert a courseDetails object to map
@@ -18,6 +19,7 @@ class CourseDetails {
       'offerPercent': offerPercent,
       'instructorName': instructorName,
       'courseFees': courseFees,
+      'courseLocation':courseLocation,
       'isFavorite': isFavorite,
     };
   }
@@ -30,12 +32,13 @@ class CourseDetails {
       map['offerPercent'] as String,
       map['instructorName'] as String,
       map['courseFees'] as String,
+      map['courseLocation'] as String,
       isFavorite: map['isFavorite'] as bool? ?? false,
     );
   }
 
   @override
   String toString() {
-    return 'CourseDetails(courseName: $courseName, instructorName: $instructorName, courseFees: $courseFees)';
+    return 'CourseDetails(courseName: $courseName, instructorName: $instructorName, courseFees: $courseFees, courseLocation: $courseLocation)';
   }
 }

@@ -8,8 +8,8 @@ class CoursesCard extends StatefulWidget {
       required this.imgUrl,
       required this.instructorName,
       required this.courseFees,
-        required this.onFavoriteChanged
-      });
+      required this.onFavoriteChanged,
+      required this.onTabDetails});
 
   final String courseName;
   final String? offerPercent;
@@ -17,6 +17,7 @@ class CoursesCard extends StatefulWidget {
   final String instructorName;
   final String courseFees;
   final Function(bool) onFavoriteChanged;
+  final VoidCallback onTabDetails;
 
   @override
   State<CoursesCard> createState() => _CoursesCardState();
@@ -35,7 +36,7 @@ class _CoursesCardState extends State<CoursesCard> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: widget.onTabDetails,
       child: Container(
         width: 180,
         padding: const EdgeInsets.all(1),

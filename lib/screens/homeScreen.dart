@@ -26,6 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           PrimaryHeaderContainer(
             child: Column(
+              // crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CustomAppBar(
                   title: const Column(
@@ -47,21 +48,12 @@ class _HomeScreenState extends State<HomeScreen> {
                             color: Colors.white,
                           ),
                         ),
-                        // Positioned(
-                        //   right: 0,
-                        //   child: Container(
-                        //     width: 18,
-                        //     height: 18,
-                        //     decoration: BoxDecoration(
-                        //       color: Colors.white60,
-                        //       borderRadius: BorderRadius.circular(100),
-                        //     ),
-                        //   ),
-                        // )
                       ],
                     ),
                   ],
                 ),
+                Image.asset('assets/images/tecg_logo.png',height: 300,)
+
               ],
             ),
           ),
